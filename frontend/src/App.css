@@ -382,3 +382,17 @@
   display: flex;
   gap: 30px;
 }
+
+.view-detail-btn {
+  padding: 3px;
+  border-radius: var(--border-radius-md);
+  border: 0.5px solid var(--color-border-secondary);
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.view-detail-btn:hover {
+  background: var(--color-background-secondary);
+}

@@ -123,7 +123,7 @@ export default function JobList() {
                 </div>
 
                 <span className="pct">{job.progress}%</span>
-                <button onClick={() => setSelectedDoc(job.document_id)}>
+                <button className="view-detail-btn" onClick={() => setSelectedDoc(job.document_id)}>
                   View Details
                 </button>
                 {selectedDoc === job.document_id && (
