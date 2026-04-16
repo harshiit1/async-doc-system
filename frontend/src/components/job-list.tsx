@@ -19,7 +19,7 @@ export default function JobList() {
     { value: "Completed", label: "Completed" },
     { value: "Failed", label: "Failed" },
   ];
-  const WS_API_BASE = import.meta.env.WS_API_URL;
+  const WS_API_BASE = import.meta.env.VITE_WB_API_URL;
   useEffect(() => {
     const loadJobs = async () => {
       try {
