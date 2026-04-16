@@ -34,7 +34,7 @@ export default function JobList() {
   }, [statusFilter]);
 
   useEffect(() => {
-    const ws = new WebSocket(`ws://${API_BASE}/websocket`);
+    const ws = new WebSocket(`wss://${API_BASE}/websocket`);
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
