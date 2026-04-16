@@ -9,9 +9,10 @@ export default function DocumentDetail({
   onClose: () => void;
 }) {
   const [data, setData] = useState<any>(null);
+  const API_BASE = import.meta.env.API_URL;
 
   useEffect(() => {
-    fetch(`http://localhost:8000/document/${docId}`)
+    fetch(`${API_BASE}/document/${docId}`)
       .then((res) => res.json())
       .then(setData);
   }, [docId]);
@@ -21,12 +22,12 @@ export default function DocumentDetail({
   const { result } = data;
 
   const handleSave = async () => {
-    await fetch(`http://localhost:8000/document/${docId}`, {
+    await fetch(`${API_BASE}/document/${docId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(result),
     });
-    const res = await fetch(`http://localhost:8000/document/${docId}`);
+    const res = await fetch(`${API_BASE}/document/${docId}`);
     const updated = await res.json();
     setData(updated);
     alert("Saved!");
@@ -34,11 +35,11 @@ export default function DocumentDetail({
   };
 
   const handleFinalize = async () => {
-    await fetch(`http://localhost:8000/document/${docId}/finalize`, {
+    await fetch(`${API_BASE}/document/${docId}/finalize`, {
       method: "PUT",
     });
     alert("Finalized!");
-    const res = await fetch(`http://localhost:8000/document/${docId}`);
+    const res = await fetch(`${API_BASE}/document/${docId}`);
     const updated = await res.json();
     setData(updated);
     onClose();
@@ -123,14 +124,14 @@ export default function DocumentDetail({
         {/* Export Links */}
         <a
           className="link"
-          href={`http://localhost:8000/document/${docId}/export/json`}
+          href={`${API_BASE}/document/${docId}/export/json`}
         >
           Export JSON
         </a>
 
         <a
           className="link"
-          href={`http://localhost:8000/document/${docId}/export/csv`}
+          href={`${API_BASE}/document/${docId}/export/csv`}
         >
           Export CSV
         </a>

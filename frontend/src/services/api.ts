@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8000";
+const API_BASE = import.meta.env.API_URL;
 
 export const export_doc = async (file: File) => {
   const formData = new FormData();

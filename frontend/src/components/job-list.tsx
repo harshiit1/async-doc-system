@@ -11,7 +11,7 @@ interface Job {
 
 export default function JobList() {
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [selectedDoc, setSelectedDoc] = useState(null);
+  const [selectedDoc, setSelectedDoc] = useState<any>(null);
   const [statusFilter, setStatusFilter] = useState("");
   const statusOptions = [
     { value: "", label: "All" },
@@ -19,6 +19,7 @@ export default function JobList() {
     { value: "Completed", label: "Completed" },
     { value: "Failed", label: "Failed" },
   ];
+  const API_BASE = import.meta.env.API_URL;
   useEffect(() => {
     const loadJobs = async () => {
       try {
@@ -33,7 +34,7 @@ export default function JobList() {
   }, [statusFilter]);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8000/websocket");
+    const ws = new WebSocket(`ws://${API_BASE}/websocket`);
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -123,7 +124,10 @@ export default function JobList() {
                 </div>
 
                 <span className="pct">{job.progress}%</span>
-                <button className="view-detail-btn" onClick={() => setSelectedDoc(job.document_id)}>
+                <button
+                  className="view-detail-btn"
+                  onClick={() => setSelectedDoc(job.document_id)}
+                >
                   View Details
                 </button>
                 {selectedDoc === job.document_id && (
