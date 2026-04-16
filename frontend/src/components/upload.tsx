@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { export_doc } from "../services/api";
 import "../App.css";
 
@@ -10,7 +10,10 @@ export default function Upload() {
     const res = await export_doc(file);
     alert("Uploaded Document id: " + res.doc_id);
   };
-
+  useEffect(() => {
+    console.log("API:", import.meta.env.VITE_API_URL);
+    console.log("WS:", import.meta.env.VITE_WS_API_URL);
+  });
   return (
     <div>
       <p className="section-label">Upload document</p>
