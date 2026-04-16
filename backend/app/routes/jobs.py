@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Response
 from app.db import sessionLocal
 from sqlalchemy.orm import Session
 from app import models
@@ -26,3 +26,17 @@ def get_jobs(
     jobs = query.all()
 
     return jobs
+
+@router.delete("/deletejobs")
+def delete_all_jobs():
+    db: Session = sessionLocal()
+    try:
+        # Delete all rows in the jobs table
+        db.query(models.Job).delete()
+        db.commit()
+        return Response()
+    except Exception as e:
+        db.rollback()
+        raise e
+    finally:
+        db.close()

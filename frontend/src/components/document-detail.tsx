@@ -26,6 +26,9 @@ export default function DocumentDetail({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(result),
     });
+    const res = await fetch(`http://localhost:8000/document/${docId}`);
+    const updated = await res.json();
+    setData(updated);
     alert("Saved!");
     onClose();
   };
@@ -35,6 +38,9 @@ export default function DocumentDetail({
       method: "PUT",
     });
     alert("Finalized!");
+    const res = await fetch(`http://localhost:8000/document/${docId}`);
+    const updated = await res.json();
+    setData(updated);
     onClose();
   };
 

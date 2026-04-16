@@ -16,8 +16,16 @@ def get_document(document_id:int):
     result = db.query(models.Result).filter(models.Result.document_id == document_id).first()
 
     return {
-        "document": doc,
-        "result": result
+         "document": {
+            "id": doc.id,
+            "filename": doc.filename,
+        } if doc else None,
+        "result": {
+            "title": result.title,
+            "category": result.category,
+            "summary": result.summary,
+            "final_result": result.final_result,
+        } if result else None
     }
 
 @router.put("/document/{document_id}")
@@ -31,8 +39,13 @@ def update_document(document_id:int, data:dict = Body(...)):
     result.summary = data.get("summary")
 
     db.commit()
-
-    return {"message": "Updated"}
+    db.refresh(result)
+    return {  
+        "title": result.title,
+        "category": result.category,
+        "summary": result.summary,
+        "final_result": result.final_result,
+        }
 
 @router.put("/document/{document_id}/finalize")
 def finalize_document(document_id:int):
