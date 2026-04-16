@@ -1,6 +1,6 @@
 # Async Document Processing Workflow System
 
-## 6363 Overview
+## Overview
 
 This project is a full-stack asynchronous document processing system built with FastAPI, React, Celery, Redis, and PostgreSQL.
 
@@ -8,7 +8,7 @@ It allows users to upload documents, process them in the background, track real-
 
 ---
 
-## 6363 Tech Stack
+## Tech Stack
 
 * Frontend: React (TypeScript, Vite)
 * Backend: FastAPI (Python)
@@ -18,7 +18,7 @@ It allows users to upload documents, process them in the background, track real-
 
 ---
 
-## 6363 Architecture
+## Architecture
 
 * Upload triggers async job via Celery
 * Worker processes document in stages
@@ -28,7 +28,7 @@ It allows users to upload documents, process them in the background, track real-
 
 ---
 
-## 6363 Workflow
+## Workflow
 
 1. Upload document
 2. Job queued
@@ -41,7 +41,7 @@ It allows users to upload documents, process them in the background, track real-
 
 ---
 
-## 63 Features
+## Features
 
 * Async background processing
 * Real-time progress tracking (WebSocket)
@@ -53,7 +53,7 @@ It allows users to upload documents, process them in the background, track real-
 
 ---
 
-## 6363 Run with Docker
+## Run with Docker
 
 ```bash
 docker-compose up --build
@@ -61,7 +61,7 @@ docker-compose up --build
 
 ---
 
-## 6363 Run Locally
+## Run Locally
 
 Backend:
 
@@ -73,7 +73,7 @@ uvicorn app.main:app --reload
 Worker:
 
 ```bash
-celery -A celery_worker.celery worker --loglevel=info
+celery -A celery_worker.celery worker --loglevel=info --pool=solo
 ```
 
 Frontend:
@@ -85,7 +85,7 @@ npm run dev
 
 ---
 
-## 6363 Assumptions
+## Assumptions
 
 * Processing logic is simulated
 * File storage is local
@@ -93,7 +93,7 @@ npm run dev
 
 ---
 
-## 6363 Improvements (Future Work)
+## Improvements (Future Work)
 
 * Authentication & user roles
 * File storage (S3)
@@ -103,13 +103,11 @@ npm run dev
 
 ---
 
-## 6363 Demo
-
-(Attach video link here)
-
+## Demo Video
+https://drive.google.com/file/d/1R7tILT931SF-p489RCKI-zwlBLH3bnEW/view?usp=sharing
 ---
 
-## 6363 AI Usage
+## AI Usage
 
 AI tools were used for guidance in structuring the system and accelerating development.
 
