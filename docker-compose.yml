@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - db
+  worker:
+    build:
+      command: celery -A celery_worker.celery worker --loglevel=info --pool=solo
+  redis:
+    image: redis:latest
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: docdb
+    ports:
+      - "5432:5432"
+  
