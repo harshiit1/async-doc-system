@@ -1,5 +1,5 @@
 # Build stage
-FROM 24.15.0-alpine3.23, AS build
+FROM 24.15.0-alpine3.23 AS build
 
 WORKDIR /app
 
