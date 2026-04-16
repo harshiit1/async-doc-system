@@ -27,13 +27,15 @@ export default function DocumentDetail({
       body: JSON.stringify(result),
     });
     alert("Saved!");
+    onClose();
   };
 
   const handleFinalize = async () => {
     await fetch(`http://localhost:8000/document/${docId}/finalize`, {
-      method: "POST",
+      method: "PUT",
     });
     alert("Finalized!");
+    onClose();
   };
 
   return (
@@ -92,11 +94,23 @@ export default function DocumentDetail({
 
         {/* Actions */}
         <div className="modal-actions">
-          <button className="btn btn-primary" onClick={handleSave}>
-            Save
+          <button
+            className="btn btn-primary"
+            disabled={result.final_result === true}
+            onClick={() => {
+              handleSave();
+            }}
+          >
+            {result.final_result ? "Saved & Locked" : "Save"}
           </button>
-          <button className="btn btn-secondary" onClick={handleFinalize}>
-            Finalize
+          <button
+            className="btn btn-secondary"
+            onClick={() => {
+              handleFinalize();
+            }}
+            disabled={result.final_result === true}
+          >
+            {result.final_result ? "Finalized" : "Finalize"}
           </button>
         </div>
 
