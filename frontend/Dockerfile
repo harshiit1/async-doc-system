@@ -13,8 +13,13 @@ RUN npm run build
 
 # Stage 2: Serve
 FROM node:22-alpine
+
 WORKDIR /app
+
 RUN npm install -g serve
+
 COPY --from=build /app/dist ./dist
 
-CMD ["sh", "-c", "serve -s dist -l $PORT"]
+EXPOSE 8080
+
+CMD ["serve", "-s", "dist", "-l", "0.0.0.0:$PORT"]
